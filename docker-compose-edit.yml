@@ -1,0 +1,74 @@
+version: "3.2"
+services:
+    nginx_service:
+      image: jwilder/nginx-proxy
+      container_name: nginx_service
+      networks:
+        - nat
+      ports:
+        - "80:80"
+        - "443:443"
+      volumes:
+        - /var/run/docker.sock:/tmp/docker.sock:ro
+        - ./certs:/etc/nginx/certs
+ 
+    app_payment:
+      restart: unless-stopped
+      build: .
+      container_name: app_payment
+      networks:
+        - nat
+      volumes:
+        - ./src:/var/www/html
+      environment:
+        - VIRTUAL_HOST=miracle-wallet.com,www.miracle-wallet.com
+ 
+    app_mafia_ftp:
+      container_name: app_mafia_ftp
+      image: docker.io/panubo/vsftpd
+      restart: always
+      networks:
+        - nat
+      environment:
+        FTP_USER: admin
+        FTP_PASSWORD: p@ym4ntg@ateway
+        FTP_CHOWN_ROOT: 1
+      ports:
+        - "21:21"
+        - "4559-4564:4559-4564"
+      volumes:
+        - ./src:/srv
+ 
+      #MySQL Service
+    db:
+      container_name: db
+      restart: always
+      image: mysql:5.7
+      ports:
+        - "3306:3306"
+      environment:
+        MYSQL_ROOT_PASSWORD: "password#10"
+        MYSQL_USER: "admin_payment"
+        MYSQL_PASSWORD: "whvbr56kkia0dn"
+        MYSQL_DATABASE: "admin_payment"
+      volumes:
+        - ./dump:/docker-entrypoint-initdb.d
+        - ./data/db:/var/lib/mysql
+      networks:
+        - nat
+ 
+    phpmyadmin:
+      container_name: phpmyadmin
+      image: phpmyadmin/phpmyadmin
+      ports:
+        - 8003:80
+      environment:
+        - VIRTUAL_HOST=myadmin.miracle-wallet.com     
+      depends_on:
+        - db
+      networks:
+        - nat
+    
+ 
+networks:
+  nat:

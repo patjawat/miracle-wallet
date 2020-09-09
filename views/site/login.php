@@ -23,14 +23,14 @@ $form = ActiveForm::begin();
     ],
 
 ]
-)->textInput(['value' => 'thanawut.pad@gmail.com'])->label('Username');?>
+)->textInput()->label('Username');?>
         <?=$form->field($model, 'password', ['inputOptions' =>
     [
         'autofocus' => 'autofocus',
         'tabindex' => '2',
         'class' => 'form-dark',
     ],
-])->passwordInput(['value' => '05573mobi'])->label('Password');?>
+])->passwordInput()->label('Password');?>
         <div class="social-auth-links mb-3">
             <?=Html::submitButton('<i class="fas fa-user-lock"></i> เข้าสู่ระบบ', ['class' => 'btn btn-primary', 'name' => 'login-button', 'tabindex' => '3'])?>
             <?=Html::a('<i class="fas fa-user-plus"></i> ลงทะเบียน',['/site/register'],['class' => 'btn btn-default'])?>
