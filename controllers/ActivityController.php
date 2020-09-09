@@ -139,11 +139,11 @@ class ActivityController extends Controller
             $updateWallet = ($userWallet->amount - ($vat_local + $model->local_amount));
         }
         $userWallet->amount = $updateWallet;
-        $userWallet->save(false);
+        return $userWallet->save(false);
         
         $model->status = 1;
         $model->process = Yii::$app->user->identity->id;
-        return $model->save(false);
+        // return $model->save(false);
         
 
     }
