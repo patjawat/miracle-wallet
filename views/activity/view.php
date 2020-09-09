@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="activity-view">
     <p>
         <?php //  Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Complate', ['complate', 'id' => $model->id], [
+        <?= $model->status == '1' ? '' : Html::a('Complate', ['complate', 'id' => $model->id], [
             'class' => 'btn btn-success',
             'id' => 'order-complate',
             // 'data' => [
