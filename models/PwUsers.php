@@ -70,7 +70,7 @@ class PwUsers extends \yii\db\ActiveRecord
 
     // ยอดฝากทั้งหมด
     public function Deposit(){
-       return Activity::find()->where(['status' => '1','type' => '2','uid' => $this->id])->count();
+       return Activity::find()->where(['status' => '1','type' => '1','uid' => $this->id])->count();
     }
 
     // ยอดถอนทั้งหมด
