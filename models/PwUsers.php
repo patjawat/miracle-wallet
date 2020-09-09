@@ -75,7 +75,7 @@ class PwUsers extends \yii\db\ActiveRecord
 
     // ยอดถอนทั้งหมด
     public function Withdraw(){
-        return Activity::find()->where(['status' => '2','type' => '2','uid' => $this->id])->count();
+        return Activity::find()->where(['status' => '1','type' => '2','uid' => $this->id])->count();
     }
 
         // ค่าะรรมเนียม
