@@ -39,7 +39,9 @@ class ActivityController extends Controller
         $searchModel = new ActivitySearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         $dataProvider->query->andFilterWhere(['uid' => $id]);
-        $dataProvider->query->andFilterWhere(['between', 'created', strtotime($searchModel->date1), strtotime($searchModel->date2)]);
+        if($searchModel->date1 || $searchModel->date2){
+            $dataProvider->query->andFilterWhere(['between', 'created', strtotime($searchModel->date1), strtotime($searchModel->date2)]);
+        }
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
