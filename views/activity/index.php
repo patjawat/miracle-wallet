@@ -131,6 +131,7 @@ HTML;
                         'view' => function ($url, $model, $key) {
                             return Html::a('<i class="far fa-eye"></i>',$url, [
                                 'class' => 'modal-show',
+                                'data-pjax' => '0',
                             ]);
                         },
                         

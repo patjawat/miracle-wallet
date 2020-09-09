@@ -9,7 +9,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\Response;
-use app\models\UserWallets;
+use app\models\UsersWallets;
 /**
  * ActivityController implements the CRUD actions for Activity model.
  */
@@ -129,16 +129,17 @@ class ActivityController extends Controller
         Yii::$app->response->format = Response::FORMAT_JSON;
 
         $model = $this->findModel($id);
-        $userWallet = UserWallets::findOne(['uid' => $model->uid,'currency' => $model->currency]);
+        $userWallet = UsersWallets::findOne(['uid' => $model->uid,'currency' => $model->currency]);
         $vat_local = number_format(($model->local_amount / 100) * $model->vat_percent,2);
         $model->vat_local = $vat_local;
         if($model->status == '1'){
-            $updateWallet = ($userWallet->amount + ($vat_local - $model->local_amount));
+            // return $userWallet;
+           $updateWallet = ($userWallet->amount + ($vat_local - $model->local_amount));
         }elseif($model->status == '2'){
             $updateWallet = ($userWallet->amount - ($vat_local + $model->local_amount));
         }
-        $$userWallet->$userWallet->amount = $updateWallet;
-        $$userWallet->save(false);
+        $userWallet->amount = $updateWallet;
+        $userWallet->save(false);
         
         $model->status = 1;
         $model->process = Yii::$app->user->identity->id;

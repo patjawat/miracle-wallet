@@ -23,6 +23,14 @@ $this->params['breadcrumbs'][] = $this->title;
             //     'method' => 'post',
             // ],
         ]) ?>
+          <?= Html::a('Complate', ['complate', 'id' => $model->id], [
+            'class' => 'btn btn-success',
+            'id' => 'order-complate',
+            // 'data' => [
+            //     'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
+            //     'method' => 'post',
+            // ],
+        ]) ?>
     </p>
     <?php Pjax::begin(['id' => 'order-view']); ?>
     <?= DetailView::widget([
@@ -72,7 +80,7 @@ $('#order-complate').click(function (e) {
         dataType: "json",
         success: function (response) {
             console.log(response);
-            $.pjax.reload({container: '#order-view', async: false});
+            // $.pjax.reload({container: '#order-view', async: false});
         }
     });
 });
