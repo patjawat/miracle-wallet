@@ -129,21 +129,21 @@ class ActivityController extends Controller
         Yii::$app->response->format = Response::FORMAT_JSON;
 
         $model = $this->findModel($id);
-        $userWallet = UsersWallets::findOne(['uid' => $model->uid,'currency' => $model->currency]);
+       $userWallet = UsersWallets::findOne(['uid' => $model->uid,'currency' => $model->currency]);
         $vat_local = number_format(($model->local_amount / 100) * $model->vat_percent,2);
         $model->vat_local = $vat_local;
-        if($model->status == '1'){
-            // return $userWallet;
-           $updateWallet = ($userWallet->amount + ($vat_local - $model->local_amount));
-        }elseif($model->status == '2'){
-            $updateWallet = ($userWallet->amount - ($vat_local + $model->local_amount));
+
+        if($model->type == '1'){
+           $updateWallet = ($userWallet->amount + ($model->local_amount - $vat_local));
+        }elseif($model->type == '2'){
+            $updateWallet = ($userWallet->amount - ($model->local_amount + $vat_local));
         }
         $userWallet->amount = $updateWallet;
-        return $userWallet->save(false);
+        $userWallet->save(false);
         
         $model->status = 1;
         $model->process = Yii::$app->user->identity->id;
-        // return $model->save(false);
+        return $model->save(false);
         
 
     }

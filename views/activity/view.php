@@ -24,7 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
             // ],
         ]) ?>
 
-<?=  Html::a('Complate', ['complate', 'id' => $model->id], [
+<?php  Html::a('Complate', ['complate', 'id' => $model->id], [
             'class' => 'btn btn-success',
             'id' => 'order-complate',
             // 'data' => [
@@ -81,7 +81,7 @@ $('#order-complate').click(function (e) {
         dataType: "json",
         success: function (response) {
             console.log(response);
-            // $.pjax.reload({container: '#order-view', async: false});
+            $.pjax.reload({container: '#order-view', async: false});
         }
     });
 });
