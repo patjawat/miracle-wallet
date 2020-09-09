@@ -73,7 +73,7 @@ $('#order-complate').click(function (e) {
         dataType: "json",
         success: function (response) {
             console.log(response);
-            // $.pjax.reload({container: '#order-view', async: false});
+            $.pjax.reload({container: '#order-view', async: false});
         }
     });
 });
