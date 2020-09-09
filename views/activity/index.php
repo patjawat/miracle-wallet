@@ -11,7 +11,7 @@ use yii\web\View;
 $this->title = Yii::t('app', 'TranSections');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-  <?php Pjax::begin();?>
+  <?php // Pjax::begin();?>
 <?php
 $layout = <<< HTML
 <div class="clearfix"></div>
@@ -141,4 +141,4 @@ HTML;
 ]);?>
 </div>
 
-<?php Pjax::end();?>
+<?php // Pjax::end();?>

@@ -23,14 +23,7 @@ $this->params['breadcrumbs'][] = $this->title;
             //     'method' => 'post',
             // ],
         ]) ?>
-          <?= Html::a('Complate', ['complate', 'id' => $model->id], [
-            'class' => 'btn btn-success',
-            'id' => 'order-complate',
-            // 'data' => [
-            //     'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
-            //     'method' => 'post',
-            // ],
-        ]) ?>
+
     </p>
     <?php Pjax::begin(['id' => 'order-view']); ?>
     <?= DetailView::widget([
