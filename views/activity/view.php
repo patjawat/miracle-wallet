@@ -24,7 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
             // ],
         ]) ?>
 
-<?php  echo Html::a('Complate', ['complate', 'id' => $model->id], [
+<?php   Html::a('Complate', ['complate', 'id' => $model->id], [
             'class' => 'btn btn-success',
             'id' => 'order-complate',
             // 'data' => [
@@ -82,6 +82,8 @@ $('#order-complate').click(function (e) {
         success: function (response) {
             if(response.status){
                 sendComplate(response.notify,response.txid)
+                $.pjax.reload({container: '#order-view', async: false});
+
             }
         }
     });
