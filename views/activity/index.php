@@ -11,6 +11,27 @@ use yii\web\View;
 $this->title = Yii::t('app', 'TranSections');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+<style>
+.form-group label.col-sm-2 {
+    text-align: end;
+}
+
+label:not(.form-check-label):not(.custom-file-label) {
+    text-align: end;
+}
+
+.form-group {
+    margin-bottom: 5px;
+}
+
+.custom-control-label::before {
+    left: -15px !important;
+}
+
+.custom-control-label::after {
+    left: -24px !important;
+}
+</style>
   <?php // Pjax::begin();?>
 <?php
 $layout = <<< HTML

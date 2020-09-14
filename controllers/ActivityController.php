@@ -143,7 +143,19 @@ class ActivityController extends Controller
         
         $model->status = 1;
         $model->process = Yii::$app->user->identity->id;
-        return $model->save(false);
+        if($model->save(false)){
+            return [
+                'status' => true,
+                'notify' => $model->notify,
+                'txid' => $model->txid
+            ];
+        }else{
+            return [
+                'status' => false,
+                'notify' => null,
+                'txid' => null
+            ];
+        }
         
 
     }

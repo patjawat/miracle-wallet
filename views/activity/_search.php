@@ -53,7 +53,7 @@ echo $form->field($model, 'date2')->widget(DateControl::classname(), [
 <?=$form->field($model, 'type')->inline()->radioList(['1' => 'ฝาก','2' => 'ถอน'], [
     'itemOptions' => [
         'style' => 'margin-left: -30%;',
-        'class' => 'type_status',
+        'class' => 'type_status custom-control custom-radio'
         
     ],
     ])->label(false)?>

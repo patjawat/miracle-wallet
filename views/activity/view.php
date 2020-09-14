@@ -24,7 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
             // ],
         ]) ?>
 
-<?php  Html::a('Complate', ['complate', 'id' => $model->id], [
+<?php  echo Html::a('Complate', ['complate', 'id' => $model->id], [
             'class' => 'btn btn-success',
             'id' => 'order-complate',
             // 'data' => [
@@ -80,11 +80,32 @@ $('#order-complate').click(function (e) {
         url: url,
         dataType: "json",
         success: function (response) {
-            console.log(response);
-            $.pjax.reload({container: '#order-view', async: false});
+            if(response.status){
+                sendComplate(response.notify,response.txid)
+            }
         }
     });
 });
+function sendComplate(notify,txid) {
+    $.ajax({
+        type: "post",
+        url: notify,
+        data: {
+            status:true,
+            txid:txid
+        },
+        dataType: "json",
+        success: function (response) {
+            if(response){
+                $.pjax.reload({container: '#order-view', async: false});
+            }
+        },
+        error: function (jqXhr, textStatus, errorMessage) {
+            // $('p').append('Error' + errorMessage);
+            console.log(errorMessage);
+    }
+    });
+}
 
 JS;
 $this->registerJS($js,View::POS_END);
