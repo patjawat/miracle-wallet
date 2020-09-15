@@ -38,6 +38,7 @@ $this->title = 'Miracle Wallet';
             ],
             [
                 'header' => 'ค่าธรรมเนียม',
+                'format' => ['decimal', 2],
                 'value' => function($model){
                     return $model->vatLocal();
                 }
